@@ -2,6 +2,7 @@
 using System.Reflection.Metadata;
 using Mango.Service.ProductAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace Mango.Service.ProductAPI.DbContexts
 {
@@ -23,7 +24,7 @@ namespace Mango.Service.ProductAPI.DbContexts
                 Name = "Samosa",
                 Price = 15,
                 Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
-                ImageUrl = "",
+                ImageUrl = "https://storage.cloud.google.com/microservicesproject/11.jpg",
                 CategoryName = "Appetizer"
             });
             modelBuilder.Entity<Product>().HasData(new Product
@@ -32,7 +33,7 @@ namespace Mango.Service.ProductAPI.DbContexts
                 Name = "Paneer Tikka",
                 Price = 13.99,
                 Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
-                ImageUrl = "",
+                ImageUrl = Environment.CurrentDirectory + "https://storage.cloud.google.com/microservicesproject/12.jpg",
                 CategoryName = "Appetizer"
             });
             modelBuilder.Entity<Product>().HasData(new Product
@@ -41,7 +42,7 @@ namespace Mango.Service.ProductAPI.DbContexts
                 Name = "Sweet Pie",
                 Price = 10.99,
                 Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
-                ImageUrl = "",
+                ImageUrl = "https://storage.cloud.google.com/microservicesproject/13.jpg",
                 CategoryName = "Dessert"
             });
             modelBuilder.Entity<Product>().HasData(new Product
@@ -50,7 +51,7 @@ namespace Mango.Service.ProductAPI.DbContexts
                 Name = "Pav Bhaji",
                 Price = 15,
                 Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
-                ImageUrl = "",
+                ImageUrl = "https://storage.cloud.google.com/microservicesproject/14.jpg",
                 CategoryName = "Entree"
             });
         }
