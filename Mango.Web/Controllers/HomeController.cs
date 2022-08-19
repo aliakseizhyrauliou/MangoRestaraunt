@@ -53,7 +53,7 @@ namespace Mango.Web.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> LoginAsync()
+        public ActionResult ginAsync()
         {
             return RedirectToAction("Index");
         }
