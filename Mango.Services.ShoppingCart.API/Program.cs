@@ -5,6 +5,7 @@ using Mango.Services.ShoppingCart.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication("Bearer")

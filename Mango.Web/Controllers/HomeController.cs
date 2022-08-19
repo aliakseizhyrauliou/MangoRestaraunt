@@ -12,9 +12,12 @@ namespace Mango.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(IProductService productService)
+        public HomeController(IProductService productService,
+            ICartService cartService)
         {
+            _cartService = cartService;
             _productService = productService;
         }
 
@@ -52,8 +55,47 @@ namespace Mango.Web.Controllers
 
         }
 
+        [HttpPost]
         [Authorize]
-        public ActionResult ginAsync()
+        [ActionName("Details")]
+        public async Task<IActionResult> DetailsPost(ProductDto productDto)
+        {
+            CartDto cartDto = new()
+            {
+                CartHeader = new CartHeaderDto()
+                {
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault().Value
+                }
+            };
+
+            CartDetailsDto cartDetails = new CartDetailsDto()
+            {
+                Count = productDto.Count,
+                ProductId = productDto.ProductId
+            };
+
+            var resp = await _productService.GetProductByIdAsync<ResponceDto>(productDto.ProductId, "");
+
+            if (resp != null && resp.IsSuccess) 
+            {
+                cartDetails.Product = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(resp.Result));
+            }
+            List<CartDetailsDto> cartDetailsDtos = new();
+            cartDetailsDtos.Add(cartDetails);
+            cartDto.CartDetails = cartDetailsDtos;
+
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var addToCartResp = await _cartService.AddToCartAsync<ResponceDto>(cartDto, accessToken);
+            if (addToCartResp != null && addToCartResp.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productDto);
+        }
+
+        [Authorize]
+        public ActionResult LoginAsync()
         {
             return RedirectToAction("Index");
         }
